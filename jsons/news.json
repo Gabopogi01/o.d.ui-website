@@ -1,0 +1,44 @@
+[
+    {
+        "label": "The Mod Is Still Not in 1K Views..."
+    },
+    {
+        "label": "NEW FEATURES!!!!!!! (1.1)",
+        "type": "header"
+    },
+
+    {
+        "type": "img",
+        "path": "tumb1"
+    },
+    {
+        "label": "Updated the Abvance window"
+    },
+    {
+        "label": "New Game Icon!"
+    },
+    {
+        "label": "Fixed when you Change the Mod Name"
+    },
+    {
+        "label": "New Website! (check the gb and wip)"
+    },
+    {
+        "label": "Added Wifi Checker!"
+    },
+    {
+        "label": "Added new music (can changed on abvance window)"
+    },
+    {
+        "label": "Added the custom Mouse (can change via abvance window)"
+    },
+    {
+        "label": "Added Changelogs!"
+    },
+    {
+        "label": "New Character: chibbigatty.xml (i didnt give him a name)"
+    },
+    {
+        "label": "Fixed that you need to dobble press the credit!"
+    }
+]

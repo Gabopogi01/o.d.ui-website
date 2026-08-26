@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'vcr';
+    src: url('vcr.ttf') format('truetype');
+}
+
+*{
+    font-family: 'vcr', sans-serif;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+h1{
+    color: white;
+    text-decoration: none;
+}
+
+
+body {
+    background-image: url('charter.png');
+    background-repeat: repeat;
+    animation: scrollBg 20s linear infinite;
+}
+
+@keyframes scrollBg {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: var(--bg-weight, 100%) var(--bg-height, 100%);
+    }
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 30px; 
+    object-fit: fill;
+    z-index: -10000;
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.things a,
+.things a:visited,
+.things a:hover,
+.things a:active {
+    color: white;
+    text-decoration: none;
+    -webkit-text-stroke: 0.1px black;
+    text-shadow: 
+        -2px -2px 0 black,  
+         2px -2px 0 black,
+        -2px  2px 0 black,
+         2px  2px 0 black;
+}
