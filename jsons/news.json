@@ -1,12 +1,27 @@
 [
     {
+        "label": "UPCOMING UPDATE!!! (1.0.3)",
+        "type": "header"
+    },
+    {
+        "type": "img",
+        "path": "lil"
+    },
+    {
+        "label": "This Update Features BugFixs and New Features!"
+    },
+    null,
+    {
+        "label": "Actually i didnt push the null, i might fix it on my next update"
+    },
+    null,
+    {
         "label": "The Mod Is Still Not in 1K Views..."
     },
     {
         "label": "NEW FEATURES!!!!!!! (1.1)",
         "type": "header"
     },
-
     {
         "type": "img",
         "path": "tumb1"
