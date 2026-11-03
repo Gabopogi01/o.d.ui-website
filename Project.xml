@@ -8,7 +8,7 @@
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
-	<app preloader="flixel.system.FlxPreloader" />
+	<app preloader="system.states.Preloader" />
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
 	<set name="SWF_VERSION" value="11.8" />
@@ -16,7 +16,7 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="640" height="480" fps="60" background="#000000" hardware="true" vsync="false" resizable="true" />
+	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" resizable="true" />
 
 	<!--HTML5-specific-->
 	<window if="html5" width="0" height="0" resizable="true" orientation="landscape" />
@@ -32,6 +32,8 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="assets" />
+	<assets path="pic" />
+	<assets path="jsons" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
