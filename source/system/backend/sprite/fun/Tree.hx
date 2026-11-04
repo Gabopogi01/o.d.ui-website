@@ -3,13 +3,12 @@ package system.backend.sprite.fun;
 import flixel.FlxSprite;
 import system.backend.Paths;
 import flixel.FlxG;
-import flixel.math.FlxMath;
 
 class Tree extends FlxSprite {
     private static var leaves1:FlxSprite;
     private static var leaves2:FlxSprite;
     private static var leaves3:FlxSprite;
-    public static var sprites:Array<FlxSprite> = [];
+    public static var sprites:Array<FlxSprite>;
     private static var time:Float;
 
     public function new() {

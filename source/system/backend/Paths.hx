@@ -8,7 +8,18 @@ class Paths {
         var fullDirec = "assets/" + direction; 
         
         if (Assets.exists(fullDirec) == false){
-            FlxG.log.warn(file + " Does not Exists!");
+            trace(fullDirec + " Does not Exists!");
+            return null;
+        } else {
+            return fullDirec;
+        }
+    }
+
+    static public function shader(direction:String){
+        var fullDirec = "assets/shader/" + direction + ".frag"; 
+
+        if (Assets.exists(fullDirec) == false){
+            trace(fullDirec + " Does not Exists!");
             return null;
         } else {
             return fullDirec;
@@ -19,7 +30,7 @@ class Paths {
         var fullDirec = "assets/images/" + direction + ".png"; 
 
         if (Assets.exists(fullDirec) == false){
-            FlxG.log.warn(file + " Does not Exists!");
+            trace(fullDirec + " Does not Exists!");
             return null;
         } else {
             return fullDirec;
@@ -27,10 +38,10 @@ class Paths {
     }
 
     static public function font(direction:String){
-        var fullDirec = "assets/images/" + direction + ".ttf"; 
+        var fullDirec = "assets/fonts/" + direction + ".ttf"; 
 
         if (Assets.exists(fullDirec) == false){
-            FlxG.log.warn(file + " Does not Exists!");
+            trace(fullDirec + " Does not Exists!");
             return null;
         } else {
             return fullDirec;
@@ -40,7 +51,7 @@ class Paths {
         var fullDirec = "assets/music/" + direction + ".ogg"; 
 
         if (Assets.exists(fullDirec) == false){
-            FlxG.log.warn(file + " Does not Exists!");
+            trace(fullDirec + " Does not Exists!");
             return null;
         } else {
             return fullDirec;
@@ -51,7 +62,7 @@ class Paths {
         var fullDirec = "jsons/" + direction; 
         
         if (Assets.exists(fullDirec) == false){
-            FlxG.log.warn(file + " Does not Exists!");
+            trace(file + " Does not Exists!");
             return null;
         } else {
             return fullDirec;
@@ -62,7 +73,7 @@ class Paths {
         var fullDirec = "pic/" + direction; 
         
         if (Assets.exists(fullDirec) == false){
-            FlxG.log.warn(file + " Does not Exists!");
+            trace(file + " Does not Exists!");
             return null;
         } else {
             return fullDirec;
