@@ -6,10 +6,10 @@ import flixel.util.FlxColor;
 import system.backend.Paths;
 
 class UiText extends FlxText{
-    public function new(X, Y, Width, Text, Size){
+    public function new(X, Y, Width, Text, Size, ?Bodersize:Float = 1.2){
         super(X, Y, Width, Text, Size);
 
         setFormat(Paths.font("vcr"), Size, FlxColor.WHITE, CENTER);
-        setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1);
+        setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, Bodersize);
     }
 }

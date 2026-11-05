@@ -13,8 +13,9 @@ import flixel.tweens.FlxEase;
 import haxe.Json;
 import lime.utils.Assets;
 import flixel.FlxG;
-import flixel.text.FlxText;
+import system.backend.sprite.ui.UiText;
 import system.ui.Info;
+import system.states.window.WipWarning;
 
 class MainWebsite extends FlxState
 {
@@ -24,7 +25,7 @@ class MainWebsite extends FlxState
 	private var scrooll = 0;
 	public static var textCam:FlxCamera;
 	public static var backdropCam:FlxCamera;
-	public static var pusha:Array<FlxText>;
+	public static var pusha:Array<UiText>;
 	private static var offset = {y: 0};
 
 	override public function create()
@@ -64,12 +65,15 @@ class MainWebsite extends FlxState
 		}});
 
 		trace(scrooll);
+
+		openSubState(new WipWarning());
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 		context.updateHitbox();
+		Info.textCam.x = context.x;
 		context.screenCenter(FlxAxes.X);
 
 		var mouseX = (FlxG.mouse.viewX - (FlxG.width / 2)) / 30;

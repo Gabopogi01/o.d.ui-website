@@ -69,6 +69,17 @@ class Paths {
         }
     }
 
+    static public function sound(direction:String){
+        var fullDirec = "assets/sounds/" + direction + ".ogg"; 
+        
+        if (Assets.exists(fullDirec) == false){
+            trace(file + " Does not Exists!");
+            return null;
+        } else {
+            return fullDirec;
+        }
+    }
+
     static public function pic(direction:String){
         var fullDirec = "pic/" + direction; 
         

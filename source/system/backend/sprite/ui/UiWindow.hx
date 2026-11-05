@@ -1,6 +1,6 @@
 package system.backend.sprite.ui;
 
-import flixel.math.FlxMath;
+import flixel.FlxSprite;
 import flixel.addons.ui.FlxUI9SliceSprite;
 import flash.geom.Rectangle;
 import flixel.FlxSubState;
@@ -8,8 +8,8 @@ import flixel.FlxCamera;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.FlxG;
-import flixel.graphics.tile.FlxGraphicsShader;
-import openfl.filters.ShaderFilter;
+import flixel.util.FlxColor;
+import system.backend.Paths;
 import system.backend.sprite.ui.UiText;
 
 private class UiWindowSprite extends FlxUI9SliceSprite {
@@ -19,76 +19,87 @@ private class UiWindowSprite extends FlxUI9SliceSprite {
         super(0, 0, Paths.image("ui/normal-popup"), rect, [12, 61, 147, 90], FlxUI9SliceSprite.TILE_NONE);
         screenCenter();
     }
-    override function update(elapsed){
+    
+    override public function update(elapsed:Float):Void {
         super.update(elapsed);
         screenCenter();
     }
 }
 
-private class BlurShader extends FlxGraphicsShader {
-    @:glFragmentSource('
-        #pragma header
-
-        uniform float uIntensity;
-
-        void main() {
-            vec2 uv = openfl_TextureCoordv;
-            vec4 color = vec4(0.0);
-            
-            float weights[5];
-            weights[0] = 0.227027; weights[1] = 0.1945946; weights[2] = 0.1216216; weights[3] = 0.054054; weights[4] = 0.016216;
-            
-            color += flixel_texture2D(bitmap, uv) * weights[0];
-            
-            for (int i = 1; i < 5; i++) {
-                float offset = float(i) * uIntensity;
-                color += flixel_texture2D(bitmap, uv + vec2(offset, 0.0)) * weights[i];
-                color += flixel_texture2D(bitmap, uv - vec2(offset, 0.0)) * weights[i];
-                color += flixel_texture2D(bitmap, uv + vec2(0.0, offset)) * weights[i];
-                color += flixel_texture2D(bitmap, uv - vec2(0.0, offset)) * weights[i];
-            }
-            
-            gl_FragColor = color / 2.0; 
-        }
-    ')
-    public function new() {
-        super();
-        this.uIntensity.value = [0.005]; 
-    }
-}
-
-
 class UiWindow extends FlxSubState {
     var windowCam:FlxCamera;
+    var windowelemCam:FlxCamera;
     public var windo(default, null):UiWindowSprite;
-    var blur = new ShaderFilter(new BlurShader());
     var text:UiText;
+    var bg:FlxSprite;
 
     public function new(?Width:Float, ?Height:Float, ?Text:String) {
         super();
 
-        for(c in FlxG.cameras.list) {
-            c.filters = [blur];
-        }
-
         windowCam = new FlxCamera();
-        windowCam.bgColor = 0;
-        windowCam.zoom = 0.001;
+        windowCam.bgColor = FlxColor.TRANSPARENT;
+        windowCam.zoom = 0.01;
+        
+        windowelemCam = new FlxCamera();
+        windowelemCam.bgColor = FlxColor.TRANSPARENT;
+        windowelemCam.zoom = 0.01;
+
+        bg = new FlxSprite(0, 0).makeGraphic(FlxG.camera.width, FlxG.camera.height, FlxColor.BLACK);
+        bg.alpha = 0;
+        add(bg);
+
         windo = new UiWindowSprite(Width, Height);
-        windo.camera = windowCam;
+        windo.cameras = [windowCam];
         add(windo);
 
         text = new UiText(windo.x + 5, windo.y + 5, 0, Text, 15);
         text.cameras = [windowCam];
         add(text);
         
-        FlxG.cameras.add(windowCam);
-        FlxTween.tween(windowCam, {zoom: 1}, 1, {ease: FlxEase.elasticOut});
+        FlxG.cameras.add(windowCam, false); 
+        FlxG.cameras.add(windowelemCam, false);
+
+        FlxTween.tween(windowCam, {zoom: 1.0}, 1, {ease: FlxEase.elasticOut});
+        FlxTween.tween(windowelemCam, {zoom: 1.0}, 1, {ease: FlxEase.elasticOut});
+        FlxTween.tween(bg, {alpha: 0.3}, 0.4, {ease: FlxEase.cubeInOut});
     }
 
-    override function update(elapsed){
+    override public function update(elapsed:Float):Void {
         super.update(elapsed);
-        text.x = windo.x + 5;
-        text.y = windo.y + 5;
+        if (windo != null && text != null) {
+            text.x = windo.x + 5;
+            text.y = windo.y + 5;
+        }
+    }
+
+    override public function close():Void {
+        FlxG.cameras.remove(windowCam);
+        FlxG.cameras.remove(windowelemCam);
+        super.close();
+        FlxG.sound.play(Paths.sound("windowClose"), 1.0);
+    }
+
+    override public function add(basic:flixel.FlxBasic):flixel.FlxBasic {
+        if (basic == null) return null;
+        if (members.indexOf(basic) >= 0) return basic;
+
+        var result = super.add(basic);
+        if (result != null && basic != bg && basic != windo && basic != text) {
+            basic.cameras = [windowelemCam];
+        }
+        return result;
+    }
+
+    override public function insert(position:Int, object:flixel.FlxBasic):flixel.FlxBasic {
+        if (object == null) return null;
+        if (members.indexOf(object) >= 0) return object;
+
+        if (position > length) position = length; 
+
+        var result = super.insert(position, object);
+        if (result != null) {
+            object.cameras = [windowelemCam];
+        }
+        return result;
     }
 }

@@ -1,11 +1,11 @@
 package system.ui;
 
 import flixel.FlxG;
-import flixel.text.FlxText;
+import system.backend.sprite.ui.UiText;
 import flixel.FlxCamera;
 
 class Info {
-    public static var pusha:Array<FlxText> = [];
+    public static var pusha:Array<UiText> = [];
     public static var textCam:FlxCamera;
     public static var whilekill = false;
 
@@ -29,7 +29,7 @@ class Info {
                 //trace(i.type);
                 trace(i.path);
                 if (i.type == null) {
-                    var textobj = new FlxText(15, 15 + (next * 16), 0, null, 9);
+                    var textobj = new UiText(15, 15 + (next * 16), 0, null, 14);
                     textobj.camera = textCam;
                     textobj.text = i.label;
                     FlxG.state.insert(100, textobj);
