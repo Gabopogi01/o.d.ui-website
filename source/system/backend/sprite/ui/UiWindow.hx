@@ -11,6 +11,7 @@ import flixel.FlxG;
 import flixel.util.FlxColor;
 import system.backend.Paths;
 import system.backend.sprite.ui.UiText;
+import openfl.Lib;
 
 private class UiWindowSprite extends FlxUI9SliceSprite {
     var rect:Rectangle;
@@ -36,11 +37,11 @@ class UiWindow extends FlxSubState {
     public function new(?Width:Float, ?Height:Float, ?Text:String) {
         super();
 
-        windowCam = new FlxCamera();
+        windowCam = new FlxCamera(0, 0);
         windowCam.bgColor = FlxColor.TRANSPARENT;
         windowCam.zoom = 0.01;
         
-        windowelemCam = new FlxCamera();
+        windowelemCam = new FlxCamera(0, 0);
         windowelemCam.bgColor = FlxColor.TRANSPARENT;
         windowelemCam.zoom = 0.01;
 
@@ -70,6 +71,14 @@ class UiWindow extends FlxSubState {
             text.x = windo.x + 5;
             text.y = windo.y + 5;
         }
+
+        var stageWidth:Int = Lib.current.stage.stageWidth;
+		var stageHeight:Int = Lib.current.stage.stageHeight;
+
+		windowCam.width = stageWidth;
+		windowCam.height = stageHeight;
+        windowelemCam.width = stageWidth;
+		windowelemCam.height = stageHeight;
     }
 
     override public function close():Void {
