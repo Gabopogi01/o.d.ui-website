@@ -12,4 +12,8 @@ class UiText extends FlxText{
         setFormat(Paths.font("vcr"), Size, FlxColor.WHITE, CENTER);
         setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, Bodersize);
     }
+
+    public function changeFont(fonte:String){
+        font = fonte;
+    }
 }

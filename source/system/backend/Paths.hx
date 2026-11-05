@@ -81,7 +81,7 @@ class Paths {
     }
 
     static public function pic(direction:String){
-        var fullDirec = "pic/" + direction; 
+        var fullDirec = "pic/" + direction + ".png"; 
         
         if (Assets.exists(fullDirec) == false){
             trace(file + " Does not Exists!");
